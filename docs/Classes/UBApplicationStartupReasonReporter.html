@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>UBApplicationStartupReasonReporter Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/objc/Class/UBApplicationStartupReasonReporter" class="dashAnchor"></a>
+    <a title="UBApplicationStartupReasonReporter Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">StartupReasonReporter Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/uber/startup-reason-reporter"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">StartupReasonReporter Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        UBApplicationStartupReasonReporter Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/UBApplicationStartupReasonReporter.html">UBApplicationStartupReasonReporter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UBApplicationStartupReasonReporterPriorRunInfo.html">UBApplicationStartupReasonReporterPriorRunInfo</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Constants.html">Constants</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonAppUpgrade">UBStartupReasonAppUpgrade</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonBackgroundEviction">UBStartupReasonBackgroundEviction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonCrash">UBStartupReasonCrash</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonDebug">UBStartupReasonDebug</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonFirstTime">UBStartupReasonFirstTime</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonForceQuit">UBStartupReasonForceQuit</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonOSUpgrade">UBStartupReasonOSUpgrade</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonOutOfMemory">UBStartupReasonOutOfMemory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonRestart">UBStartupReasonRestart</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/UBApplicationStartupReasonReporterPriorRunInfoProtocol.html">UBApplicationStartupReasonReporterPriorRunInfoProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Type Definitions.html">Type Definitions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Type Definitions.html#/c:UBApplicationStartupReasonReporter.h@T@UBStartupReason">UBStartupReason</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>UBApplicationStartupReasonReporter</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="k">@interface</span> <span class="nc">UBApplicationStartupReasonReporter</span> <span class="p">:</span> <span class="nc">NSObject</span></code></pre>
+
+                </div>
+              </div>
+            <p>The Startup Reason Reporter allows developers the ability to deduce the reason that an iOS application has launched, or equivalently, the reason that the application terminated on the prior launch.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)UBApplicationStartupReasonReporter(py)startupReason"></a>
+                    <a name="//apple_ref/objc/Property/startupReason" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)UBApplicationStartupReasonReporter(py)startupReason">startupReason</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The reason the application started up.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">,</span> <span class="n">readwrite</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n"><a href="../Type Definitions.html#/c:UBApplicationStartupReasonReporter.h@T@UBStartupReason">UBStartupReason</a></span> <span class="n">_Nonnull</span> <span class="n">startupReason</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">startupReason</span><span class="p">:</span> <span class="kt">StartupReason</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)UBApplicationStartupReasonReporter(cm)systemBootTime"></a>
+                    <a name="//apple_ref/objc/Method/+systemBootTime" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)UBApplicationStartupReasonReporter(cm)systemBootTime">+systemBootTime</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The time when the system was last booted.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">+</span> <span class="p">(</span><span class="kt">time_t</span><span class="p">)</span><span class="n">systemBootTime</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">systemBootTime</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">time_t</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)UBApplicationStartupReasonReporter(im)init"></a>
+                    <a name="//apple_ref/objc/Method/-init" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)UBApplicationStartupReasonReporter(im)init">-init</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Unavailable.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">-</span> <span class="p">(</span><span class="n">nonnull</span> <span class="n">instancetype</span><span class="p">)</span><span class="n">init</span><span class="p">;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)UBApplicationStartupReasonReporter(im)initWithNotificationCenter:previousRunDidCrash:previousRunInfo:debugging:"></a>
+                    <a name="//apple_ref/objc/Method/-initWithNotificationCenter:previousRunDidCrash:previousRunInfo:debugging:" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)UBApplicationStartupReasonReporter(im)initWithNotificationCenter:previousRunDidCrash:previousRunInfo:debugging:">-initWithNotificationCenter:previousRunDidCrash:previousRunInfo:debugging:</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a new UBApplicationStartupReasonReporter.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">-</span> <span class="p">(</span><span class="n">nonnull</span> <span class="n">instancetype</span><span class="p">)</span>
+<span class="nf">initWithNotificationCenter</span><span class="p">:(</span><span class="n">nonnull</span> <span class="n">NSNotificationCenter</span> <span class="o">*</span><span class="p">)</span><span class="nv">notificationCenter</span>
+       <span class="nf">previousRunDidCrash</span><span class="p">:(</span><span class="n">BOOL</span><span class="p">)</span><span class="nv">previousRunDidCrash</span>
+           <span class="nf">previousRunInfo</span><span class="p">:</span>
+               <span class="p">(</span><span class="n">nonnull</span>
+                    <span class="n">id</span><span class="o">&lt;</span><span class="n"><a href="../Protocols/UBApplicationStartupReasonReporterPriorRunInfoProtocol.html">UBApplicationStartupReasonReporterPriorRunInfoProtocol</a></span><span class="o">&gt;</span><span class="p">)</span>
+                   <span class="n">previousRunInfo</span>
+                 <span class="n">debugging</span><span class="o">:</span><span class="p">(</span><span class="n">BOOL</span><span class="p">)</span><span class="n">debugging</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="nf">init</span><span class="p">(</span><span class="nv">notificationCenter</span><span class="p">:</span> <span class="kt">NotificationCenter</span><span class="p">,</span> <span class="nv">previousRunDidCrash</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">previousRunInfo</span><span class="p">:</span> <span class="kt"><a href="../Protocols/UBApplicationStartupReasonReporterPriorRunInfoProtocol.html">UBApplicationStartupReasonReporterPriorRunInfoProtocol</a></span><span class="p">,</span> <span class="nv">debugging</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>notificationCenter</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The current NSNotificationCenter</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>previousRunDidCrash</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Indicates whether the prior run was a crash</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>previousRunInfo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An implementation of UBApplicationStartupReasonReporterPriorRunInfoProtocol which contains information about the prior run and will store information about the current run.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>debugging</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>True if this app run is for debugging, false otherwise.  This is useful if the app is being developed in the simulator, for instance.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="http://eng.uber.com" target="_blank" rel="external">Uber Engineering</a>. All rights reserved. (Last updated: 2017-05-01)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

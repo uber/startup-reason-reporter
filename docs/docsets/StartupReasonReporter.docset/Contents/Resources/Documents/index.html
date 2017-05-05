@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>StartupReasonReporter  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="StartupReasonReporter  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">StartupReasonReporter Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/uber/startup-reason-reporter"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">StartupReasonReporter Reference</a>
+        <img id="carat" src="img/carat.png" />
+        StartupReasonReporter  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/UBApplicationStartupReasonReporter.html">UBApplicationStartupReasonReporter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/UBApplicationStartupReasonReporterPriorRunInfo.html">UBApplicationStartupReasonReporterPriorRunInfo</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Constants.html">Constants</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Constants.html#/c:@UBStartupReasonAppUpgrade">UBStartupReasonAppUpgrade</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Constants.html#/c:@UBStartupReasonBackgroundEviction">UBStartupReasonBackgroundEviction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Constants.html#/c:@UBStartupReasonCrash">UBStartupReasonCrash</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Constants.html#/c:@UBStartupReasonDebug">UBStartupReasonDebug</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Constants.html#/c:@UBStartupReasonFirstTime">UBStartupReasonFirstTime</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Constants.html#/c:@UBStartupReasonForceQuit">UBStartupReasonForceQuit</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Constants.html#/c:@UBStartupReasonOSUpgrade">UBStartupReasonOSUpgrade</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Constants.html#/c:@UBStartupReasonOutOfMemory">UBStartupReasonOutOfMemory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Constants.html#/c:@UBStartupReasonRestart">UBStartupReasonRestart</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/UBApplicationStartupReasonReporterPriorRunInfoProtocol.html">UBApplicationStartupReasonReporterPriorRunInfoProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Type Definitions.html">Type Definitions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Type Definitions.html#/c:UBApplicationStartupReasonReporter.h@T@UBStartupReason">UBStartupReason</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <a href='#startup-reason-reporter' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='startup-reason-reporter'>Startup Reason Reporter</h1>
+
+<p><a href="https://travis-ci.org/uber/ios-template"><img src="https://travis-ci.com/uber/ios-template.svg?token=dQ3snsDthCn9KcpYgvn8&branch=master" alt="Build Status"></a></p>
+
+<p>The Startup Reason Reporter allows developers the ability to deduce the reason that an iOS application has launched, or equivalently, the reason that the application terminated on the prior launch.</p>
+<a href='#use' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='use'>Use</h2>
+
+<p>Usage is fairly straight-forward:</p>
+<pre class="highlight plaintext"><code>// Determine whether the app crashed on a prior launch
+let crashedOnPriorLaunch = ...
+
+// Initialize a storage mechanism implementing UBApplicationStartupReasonReporterPriorRunInfoProtocol
+let previousRunInfo: UBApplicationStartupReasonReporterPriorRunInfoProtocol = ...
+
+// Initialize the startup reason reporter
+let startupReasonReporter = ApplicationStartupReasonReporter(notificationCenter: NotificationCenter.default, 
+previousRunDidCrash: crashedOnPreviousLaunch, 
+previousRunInfo: previousRunInfo, 
+debugging: false)
+
+// Profit
+let startupReason =  startupReasonReporter.startupReason
+</code></pre>
+<a href='#introduction' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='introduction'>Introduction</h2>
+
+<p>The ApplicationStartupReasonReporter is based on the general idea that applications may terminate for a fixed set of reasons on iOS.  </p>
+
+<p>Through process of elimination, the ApplicationStartupReasonReporter can detect important events such as OOM crashes and app upgrades.  The full list of possible startup reasons is described below.</p>
+
+<p>Critically, the reported startup reason is only as accurate as the the data that is provided to the ApplicationStartupReasonReporter.  Some crash detection mechanisms may not encompass all forms of crashes.</p>
+
+<p>Our process for detecting various startup reasons is detailed by Ali Ansari and Grzegorz Pstrucha in this blog post: <a href="https://code.facebook.com/posts/1146930688654547/reducing-fooms-in-the-facebook-ios-app/">Reducing FOOMs in the iOS app</a></p>
+
+<p>In order for detection to work, you must provide a class that implements prior run storage and conforms to UBApplicationStartupReasonReporterPriorRunInfoProtocol.  We provide one such class, backed by NSUserDefaults, in UBApplicationStartupReasonReporterPriorRunInfo, though you may also wish to implement your own version that is backed by your preferred storage mechanism.</p>
+
+<p>Possible startup reasons are as follows:</p>
+<pre class="highlight plaintext"><code>UBStartupReason const UBStartupReasonDebug = @"debug";
+UBStartupReason const UBStartupReasonFirstTime = @"first_time";
+UBStartupReason const UBStartupReasonCrash = @"crash";
+UBStartupReason const UBStartupReasonForceQuit = @"force_quit";
+UBStartupReason const UBStartupReasonAppUpgrade = @"app_upgrade";
+UBStartupReason const UBStartupReasonOSUpgrade = @"os_upgrade";
+UBStartupReason const UBStartupReasonBackgroundEviction = @"background_eviction";
+UBStartupReason const UBStartupReasonRestart = @"restart";
+UBStartupReason const UBStartupReasonOutOfMemory = @"out_of_memory";
+</code></pre>
+<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
+<a href='#cocoapods' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='cocoapods'>CocoaPods</h4>
+
+<p>To integrate NAME into your project add the following to your <code>Podfile</code>:</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'NAME'</span><span class="p">,</span> <span class="s1">'~&gt; 1.0'</span>
+</code></pre>
+<a href='#carthage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='carthage'>Carthage</h4>
+
+<p>To integrate NAME into your project using Carthage add the following to your <code>Cartfile</code>:</p>
+<pre class="highlight ruby"><code><span class="n">github</span> <span class="s2">"uber/ios-NAME"</span> <span class="o">~&gt;</span> <span class="mi">2</span><span class="o">.</span><span class="mi">0</span>
+</code></pre>
+<a href='#contributions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='contributions'>Contributions</h2>
+
+<p>We&rsquo;d love for you to contribute to our open source projects. Before we can accept your contributions, we kindly ask you to sign our <a href="https://docs.google.com/a/uber.com/forms/d/1pAwS_-dA1KhPlfxzYLBqK6rsSWwRwH95OCCZrcsY5rk/viewform">Uber Contributor License Agreement</a>.</p>
+
+<ul>
+<li>If you <strong>find a bug</strong>, open an issue or submit a fix via a pull request.</li>
+<li>If you <strong>have a feature request</strong>, open an issue or submit an implementation via a pull request</li>
+<li>If you <strong>want to contribute</strong>, submit a pull request.</li>
+</ul>
+<a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
+
+<p>NAME is released under a MIT license. See the LICENSE file for more information.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="http://eng.uber.com" target="_blank" rel="external">Uber Engineering</a>. All rights reserved. (Last updated: 2017-05-01)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

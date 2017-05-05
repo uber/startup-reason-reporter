@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>UBApplicationStartupReasonReporterPriorRunInfoProtocol Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/objc/Protocol/UBApplicationStartupReasonReporterPriorRunInfoProtocol" class="dashAnchor"></a>
+    <a title="UBApplicationStartupReasonReporterPriorRunInfoProtocol Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">StartupReasonReporter Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/uber/startup-reason-reporter"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">StartupReasonReporter Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        UBApplicationStartupReasonReporterPriorRunInfoProtocol Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/UBApplicationStartupReasonReporter.html">UBApplicationStartupReasonReporter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UBApplicationStartupReasonReporterPriorRunInfo.html">UBApplicationStartupReasonReporterPriorRunInfo</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Constants.html">Constants</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonAppUpgrade">UBStartupReasonAppUpgrade</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonBackgroundEviction">UBStartupReasonBackgroundEviction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonCrash">UBStartupReasonCrash</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonDebug">UBStartupReasonDebug</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonFirstTime">UBStartupReasonFirstTime</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonForceQuit">UBStartupReasonForceQuit</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonOSUpgrade">UBStartupReasonOSUpgrade</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonOutOfMemory">UBStartupReasonOutOfMemory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@UBStartupReasonRestart">UBStartupReasonRestart</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/UBApplicationStartupReasonReporterPriorRunInfoProtocol.html">UBApplicationStartupReasonReporterPriorRunInfoProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Type Definitions.html">Type Definitions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Type Definitions.html#/c:UBApplicationStartupReasonReporter.h@T@UBStartupReason">UBStartupReason</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>UBApplicationStartupReasonReporterPriorRunInfoProtocol</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="k">@protocol</span> <span class="nc">UBApplicationStartupReasonReporterPriorRunInfoProtocol</span></code></pre>
+
+                </div>
+              </div>
+            <p>Defines a storage interface for the UBApplicationStartupReasonReporter.
+On launch, should contain information regarding the prior app run.
+When data is set thereafter, a call to persist should persist the data for the next app launch.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(pl)UBApplicationStartupReasonReporterPriorRunInfoProtocol(py)hasData"></a>
+                    <a name="//apple_ref/objc/Property/hasData" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(pl)UBApplicationStartupReasonReporterPriorRunInfoProtocol(py)hasData">hasData</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicates whether data exists for the prior run.  Generally, this will be false on the first run and true thereafter.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">,</span> <span class="n">readwrite</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">BOOL</span> <span class="n">hasData</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">hasData</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(pl)UBApplicationStartupReasonReporterPriorRunInfoProtocol(py)previousAppVersion"></a>
+                    <a name="//apple_ref/objc/Property/previousAppVersion" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(pl)UBApplicationStartupReasonReporterPriorRunInfoProtocol(py)previousAppVersion">previousAppVersion</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The app version of the prior app run.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readwrite</span><span class="p">,</span> <span class="n">copy</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">,</span> <span class="n">nullable</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">previousAppVersion</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">previousAppVersion</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(pl)UBApplicationStartupReasonReporterPriorRunInfoProtocol(py)previousOSVersion"></a>
+                    <a name="//apple_ref/objc/Property/previousOSVersion" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(pl)UBApplicationStartupReasonReporterPriorRunInfoProtocol(py)previousOSVersion">previousOSVersion</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The OS version of the prior app run.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readwrite</span><span class="p">,</span> <span class="n">copy</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">,</span> <span class="n">nullable</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">previousOSVersion</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">previousOSVersion</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(pl)UBApplicationStartupReasonReporterPriorRunInfoProtocol(py)previousBootTime"></a>
+                    <a name="//apple_ref/objc/Property/previousBootTime" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(pl)UBApplicationStartupReasonReporterPriorRunInfoProtocol(py)previousBootTime">previousBootTime</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The boot time of the prior app run.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">,</span> <span class="n">readwrite</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="kt">time_t</span> <span class="n">previousBootTime</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">previousBootTime</span><span class="p">:</span> <span class="n">time_t</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(pl)UBApplicationStartupReasonReporterPriorRunInfoProtocol(py)backgrounded"></a>
+                    <a name="//apple_ref/objc/Property/backgrounded" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(pl)UBApplicationStartupReasonReporterPriorRunInfoProtocol(py)backgrounded">backgrounded</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicates whether the prior app run was backgrounded.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">,</span> <span class="n">readwrite</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">BOOL</span> <span class="n">backgrounded</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">backgrounded</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(pl)UBApplicationStartupReasonReporterPriorRunInfoProtocol(py)didTerminate"></a>
+                    <a name="//apple_ref/objc/Property/didTerminate" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(pl)UBApplicationStartupReasonReporterPriorRunInfoProtocol(py)didTerminate">didTerminate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicates whether the prior app run was terminated.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">,</span> <span class="n">readwrite</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">BOOL</span> <span class="n">didTerminate</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">didTerminate</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(pl)UBApplicationStartupReasonReporterPriorRunInfoProtocol(im)persist"></a>
+                    <a name="//apple_ref/objc/Method/-persist" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(pl)UBApplicationStartupReasonReporterPriorRunInfoProtocol(im)persist">-persist</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Persists the current prior run info to disk.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">persist</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">persist</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="http://eng.uber.com" target="_blank" rel="external">Uber Engineering</a>. All rights reserved. (Last updated: 2017-05-01)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
