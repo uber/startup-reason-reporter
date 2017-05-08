@@ -27,11 +27,13 @@ The Startup Reason Reporter provides developers the the reason that an iOS appli
   s.author           = "Uber"
   
   s.ios.deployment_target = '8.0'
-
-  s.source_files = 'StartupReasonReporter/**/*'
   
   s.subspec 'Core' do |core|
     core.source_files = 'StartupReasonReporter/StartupReasonReporter/*'
+  end
+
+  s.subspec 'PriorRunInfo' do |core|
+    core.source_files = 'StartupReasonReporter/StartupReasonReporterPriorRunInfo/*'
   end
 
 end
