@@ -8,6 +8,7 @@ Usage is fairly straight-forward:
 
 
 Swift:
+
 ```
 // Determine whether the app crashed on a prior launch
 let crashedOnPriorLaunch = ...
@@ -26,6 +27,7 @@ let startupReason =  startupReasonReporter.startupReason
 ```
 
 Obj-C:
+
 ```
 // Determine whether the app crashed on a prior launch
 BOOL crashedOnPriorLaunch = ...

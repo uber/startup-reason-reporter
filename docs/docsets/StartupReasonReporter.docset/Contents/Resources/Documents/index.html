@@ -99,41 +99,39 @@
 
 <p>Usage is fairly straight-forward:</p>
 
-<p>Swift:
-&ldquo;`
-// Determine whether the app crashed on a prior launch
-let crashedOnPriorLaunch = &hellip;</p>
+<p>Swift:</p>
+<pre class="highlight plaintext"><code>// Determine whether the app crashed on a prior launch
+let crashedOnPriorLaunch = ...
 
-<p>// Initialize a storage mechanism implementing UBApplicationStartupReasonReporterPriorRunInfoProtocol
-let previousRunInfo: ApplicationStartupReasonReporterProtocol = &hellip;</p>
+// Initialize a storage mechanism implementing UBApplicationStartupReasonReporterPriorRunInfoProtocol
+let previousRunInfo: ApplicationStartupReasonReporterProtocol = ...
 
-<p>// Initialize the startup reason reporter
+// Initialize the startup reason reporter
 let startupReasonReporter = ApplicationStartupReasonReporter(notificationCenter: NotificationCenter.default, 
 previousRunDidCrash: crashedOnPreviousLaunch, 
 previousRunInfo: previousRunInfo, 
-debugging: false)</p>
+debugging: false)
 
-<p>// Profit
+// Profit
 let startupReason =  startupReasonReporter.startupReason
-&rdquo;`</p>
+</code></pre>
 
-<p>Obj-C:
-&ldquo;`
-// Determine whether the app crashed on a prior launch
-BOOL crashedOnPriorLaunch = &hellip;</p>
+<p>Obj-C:</p>
+<pre class="highlight plaintext"><code>// Determine whether the app crashed on a prior launch
+BOOL crashedOnPriorLaunch = ...
 
-<p>// Initialize a storage mechanism implementing UBApplicationStartupReasonReporterPriorRunInfoProtocol
-id<UBApplicationStartupReasonReporterPriorRunInfoProtocol> runInfo = &hellip;</p>
+// Initialize a storage mechanism implementing UBApplicationStartupReasonReporterPriorRunInfoProtocol
+id&lt;UBApplicationStartupReasonReporterPriorRunInfoProtocol&gt; runInfo = ...
 
-<p>// Initialize the startup reason reporter
+// Initialize the startup reason reporter
 UBApplicationStartupReasonReporter *applicationStartupReasonReporter = [[UBApplicationStartupReasonReporter alloc] initWithNotificationCenter:[NSNotificationCenter defaultCenter]
         previousRunDidCrash:self.crashReporter.crashDetected
         previousRunInfo:runInfo
-        debugging:[UBBuildType isDebugBuild]];</p>
+        debugging:[UBBuildType isDebugBuild]];
 
-<p>// Profit
+// Profit
 UBStartupReason startupReason = startupReasonReporter.startupReason
-&rdquo;`</p>
+</code></pre>
 <a href='#introduction' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='introduction'>Introduction</h2>
 
 <p>The UBStartupReasonReporter is based on the general idea that applications may terminate for a fixed set of reasons on iOS.  </p>
