@@ -32,8 +32,9 @@ The Startup Reason Reporter provides developers the the reason that an iOS appli
     core.source_files = 'StartupReasonReporter/StartupReasonReporter/*'
   end
 
-  s.subspec 'PriorRunInfo' do |core|
-    core.source_files = 'StartupReasonReporter/StartupReasonReporterPriorRunInfo/*'
+  s.subspec 'PriorRunInfo' do |pri|
+    pri.source_files = 'StartupReasonReporter/StartupReasonReporterPriorRunInfo/*'
+    pri.dependency 'StartupReasonReporter/Core'
   end
 
 end
