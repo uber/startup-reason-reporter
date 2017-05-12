@@ -1,4 +1,4 @@
-# Startup Reason Reporter v0.1.0 [![Build Status](https://travis-ci.org/uber/startup-reason-reporter.svg?branch=master)](https://travis-ci.org/uber/startup-reason-reporter)
+# Startup Reason Reporter [![Build Status](https://travis-ci.org/uber/startup-reason-reporter.svg?branch=master)](https://travis-ci.org/uber/startup-reason-reporter)
 
 The Startup Reason Reporter provides developers the reason that an iOS application has launched, or equivalently, the reason that the application terminated on the prior launch.
 
