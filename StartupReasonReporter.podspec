@@ -21,9 +21,9 @@ Pod::Spec.new do |s|
 The Startup Reason Reporter provides developers the the reason that an iOS application has launched, or equivalently, the reason that the application terminated on the prior launch.
                        DESC
 
-  s.homepage         = 'https://github.com/uber/StartupReasonReporter'
+  s.homepage         = 'https://github.com/uber/startup-reason-reporter'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.source           = { :git => 'https://github.com/uber/StartupReasonReporter.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/uber/startup-reason-reporter.git', :tag => s.version.to_s }
   s.author           = "Uber"
   
   s.ios.deployment_target = '8.0'
