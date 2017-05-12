@@ -49,7 +49,7 @@ The UBStartupReasonReporter is based on the general idea that applications may t
 
 Through process of elimination, the UBStartupReasonReporter can detect important events such as OOM crashes and app upgrades.  The full list of possible startup reasons is described below.
 
-Critically, the reported startup reason is only as accurate as the the data that is provided to it.  Some crash detection mechanisms may not encompass all forms of crashes, for instance, and that may throw off the reported reason.
+Critically, the reported startup reason is only as accurate as the the data that is provided to it.  For instance, some crash detection mechanisms may not encompass all forms of crashes, which may throw off the reported reason.
 
 Our process for detecting various startup reasons is detailed by Ali Ansari and Grzegorz Pstrucha in this blog post: [Reducing FOOMs in the iOS app](https://code.facebook.com/posts/1146930688654547/reducing-fooms-in-the-facebook-ios-app/)
 
@@ -72,7 +72,7 @@ UBStartupReason const UBStartupReasonOutOfMemory = @"out_of_memory";
 ## Installation
 #### CocoaPods
 
-To integrate NAME into your project add the following to your `Podfile`:
+To integrate the StartupReasonReporter into your project add the following to your `Podfile`:
 
 ```ruby
 pod 'StartupReasonReporter', '~> 0.1'
@@ -86,7 +86,7 @@ pod 'StartupReasonReporter/Core', '~> 0.1'
 
 #### Carthage
 
-To integrate NAME into your project using Carthage add the following to your `Cartfile`:
+To integrate the StartupReasonReporter into your project using Carthage add the following to your `Cartfile`:
 
 ```ruby
 github "uber/StartupReasonReporter" ~> 0.1
