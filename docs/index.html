@@ -92,36 +92,55 @@
         <section>
           <section class="section">
             
-            <a href='#startup-reason-reporter' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='startup-reason-reporter'>Startup Reason Reporter</h1>
+            <a href='#startup-reason-reporter-a-href-https-travis-ci-org-uber-startup-reason-reporter-img-src-https-travis-ci-org-uber-startup-reason-reporter-svg-branch-master-alt-build-status-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='startup-reason-reporter-a-href-https-travis-ci-org-uber-startup-reason-reporter-img-src-https-travis-ci-org-uber-startup-reason-reporter-svg-branch-master-alt-build-status-a'>Startup Reason Reporter <a href="https://travis-ci.org/uber/startup-reason-reporter"><img src="https://travis-ci.org/uber/startup-reason-reporter.svg?branch=master" alt="Build Status"></a></h1>
 
-<p><a href="https://travis-ci.org/uber/ios-template"><img src="https://travis-ci.com/uber/ios-template.svg?token=dQ3snsDthCn9KcpYgvn8&branch=master" alt="Build Status"></a></p>
-
-<p>The Startup Reason Reporter allows developers the ability to deduce the reason that an iOS application has launched, or equivalently, the reason that the application terminated on the prior launch.</p>
+<p>The Startup Reason Reporter provides developers the reason that an iOS application has launched, or equivalently, the reason that the application terminated on the prior launch.</p>
 <a href='#use' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='use'>Use</h2>
 
 <p>Usage is fairly straight-forward:</p>
-<pre class="highlight plaintext"><code>// Determine whether the app crashed on a prior launch
-let crashedOnPriorLaunch = ...
 
-// Initialize a storage mechanism implementing UBApplicationStartupReasonReporterPriorRunInfoProtocol
-let previousRunInfo: UBApplicationStartupReasonReporterPriorRunInfoProtocol = ...
+<p>Swift:
+&ldquo;`
+// Determine whether the app crashed on a prior launch
+let crashedOnPriorLaunch = &hellip;</p>
 
-// Initialize the startup reason reporter
+<p>// Initialize a storage mechanism implementing UBApplicationStartupReasonReporterPriorRunInfoProtocol
+let previousRunInfo: ApplicationStartupReasonReporterProtocol = &hellip;</p>
+
+<p>// Initialize the startup reason reporter
 let startupReasonReporter = ApplicationStartupReasonReporter(notificationCenter: NotificationCenter.default, 
 previousRunDidCrash: crashedOnPreviousLaunch, 
 previousRunInfo: previousRunInfo, 
-debugging: false)
+debugging: false)</p>
 
-// Profit
+<p>// Profit
 let startupReason =  startupReasonReporter.startupReason
-</code></pre>
+&rdquo;`</p>
+
+<p>Obj-C:
+&ldquo;`
+// Determine whether the app crashed on a prior launch
+BOOL crashedOnPriorLaunch = &hellip;</p>
+
+<p>// Initialize a storage mechanism implementing UBApplicationStartupReasonReporterPriorRunInfoProtocol
+id<UBApplicationStartupReasonReporterPriorRunInfoProtocol> runInfo = &hellip;</p>
+
+<p>// Initialize the startup reason reporter
+UBApplicationStartupReasonReporter *applicationStartupReasonReporter = [[UBApplicationStartupReasonReporter alloc] initWithNotificationCenter:[NSNotificationCenter defaultCenter]
+        previousRunDidCrash:self.crashReporter.crashDetected
+        previousRunInfo:runInfo
+        debugging:[UBBuildType isDebugBuild]];</p>
+
+<p>// Profit
+UBStartupReason startupReason = startupReasonReporter.startupReason
+&rdquo;`</p>
 <a href='#introduction' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='introduction'>Introduction</h2>
 
-<p>The ApplicationStartupReasonReporter is based on the general idea that applications may terminate for a fixed set of reasons on iOS.  </p>
+<p>The UBStartupReasonReporter is based on the general idea that applications may terminate for a fixed set of reasons on iOS.  </p>
 
-<p>Through process of elimination, the ApplicationStartupReasonReporter can detect important events such as OOM crashes and app upgrades.  The full list of possible startup reasons is described below.</p>
+<p>Through process of elimination, the UBStartupReasonReporter can detect important events such as OOM crashes and app upgrades.  The full list of possible startup reasons is described below.</p>
 
-<p>Critically, the reported startup reason is only as accurate as the the data that is provided to the ApplicationStartupReasonReporter.  Some crash detection mechanisms may not encompass all forms of crashes.</p>
+<p>Critically, the reported startup reason is only as accurate as the the data that is provided to it.  For instance, some crash detection mechanisms may not encompass all forms of crashes, which may throw off the reported reason.</p>
 
 <p>Our process for detecting various startup reasons is detailed by Ali Ansari and Grzegorz Pstrucha in this blog post: <a href="https://code.facebook.com/posts/1146930688654547/reducing-fooms-in-the-facebook-ios-app/">Reducing FOOMs in the iOS app</a></p>
 
@@ -141,13 +160,17 @@ UBStartupReason const UBStartupReasonOutOfMemory = @"out_of_memory";
 <a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
 <a href='#cocoapods' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='cocoapods'>CocoaPods</h4>
 
-<p>To integrate NAME into your project add the following to your <code>Podfile</code>:</p>
-<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'NAME'</span><span class="p">,</span> <span class="s1">'~&gt; 1.0'</span>
+<p>To integrate the StartupReasonReporter into your project add the following to your <code>Podfile</code>:</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'StartupReasonReporter'</span><span class="p">,</span> <span class="s1">'~&gt; 0.1'</span>
+</code></pre>
+
+<p>To integrate only the <code>UBApplicationStartupReasonReporterPriorRunInfoProtocol</code> protocol, but not the implementation, add the following to your <code>Podfile</code>:</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'StartupReasonReporter/Core'</span><span class="p">,</span> <span class="s1">'~&gt; 0.1'</span>
 </code></pre>
 <a href='#carthage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='carthage'>Carthage</h4>
 
-<p>To integrate NAME into your project using Carthage add the following to your <code>Cartfile</code>:</p>
-<pre class="highlight ruby"><code><span class="n">github</span> <span class="s2">"uber/ios-NAME"</span> <span class="o">~&gt;</span> <span class="mi">2</span><span class="o">.</span><span class="mi">0</span>
+<p>To integrate the StartupReasonReporter into your project using Carthage add the following to your <code>Cartfile</code>:</p>
+<pre class="highlight ruby"><code><span class="n">github</span> <span class="s2">"uber/StartupReasonReporter"</span> <span class="o">~&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span>
 </code></pre>
 <a href='#contributions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='contributions'>Contributions</h2>
 
@@ -159,13 +182,31 @@ UBStartupReason const UBStartupReasonOutOfMemory = @"out_of_memory";
 <li>If you <strong>want to contribute</strong>, submit a pull request.</li>
 </ul>
 <a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
+<pre class="highlight plaintext"><code>Copyright (c) 2015 Uber Technologies, Inc.
 
-<p>NAME is released under a MIT license. See the LICENSE file for more information.</p>
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</code></pre>
 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="http://eng.uber.com" target="_blank" rel="external">Uber Engineering</a>. All rights reserved. (Last updated: 2017-05-01)</p>
+          <p>&copy; 2017 <a class="link" href="http://eng.uber.com" target="_blank" rel="external">Uber Engineering</a>. All rights reserved. (Last updated: 2017-05-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
