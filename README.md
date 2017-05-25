@@ -9,7 +9,7 @@ Usage is fairly straight-forward:
 
 Swift:
 
-```
+```swift
 // Determine whether the app crashed on a prior launch
 let crashedOnPriorLaunch = ...
 
@@ -28,7 +28,7 @@ let startupReason =  startupReasonReporter.startupReason
 
 Obj-C:
 
-```
+```objc
 // Determine whether the app crashed on a prior launch
 BOOL crashedOnPriorLaunch = ...
 
@@ -59,7 +59,7 @@ In order for detection to work, you must provide a class that implements prior r
 
 Possible startup reasons are as follows:
 
-```
+```objc
 UBStartupReason const UBStartupReasonDebug = @"debug";
 UBStartupReason const UBStartupReasonFirstTime = @"first_time";
 UBStartupReason const UBStartupReasonCrash = @"crash";
