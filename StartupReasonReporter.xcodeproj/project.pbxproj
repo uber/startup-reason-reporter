@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A096D351EB7DEBD00F7DF5B /* StartupReasonReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A096D341EB7DE5C00F7DF5B /* StartupReasonReporter.h */; };
+		3A096D351EB7DEBD00F7DF5B /* StartupReasonReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A096D341EB7DE5C00F7DF5B /* StartupReasonReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AE8A23A1EA14A4E00AA6B9E /* StartupReasonReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE8A2301EA14A4E00AA6B9E /* StartupReasonReporter.framework */; };
-		617190381EB2B47400057990 /* UBApplicationStartupReasonReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 617190371EB2B47400057990 /* UBApplicationStartupReasonReporter.h */; };
+		617190381EB2B47400057990 /* UBApplicationStartupReasonReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 617190371EB2B47400057990 /* UBApplicationStartupReasonReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6171903D1EB2B4DB00057990 /* UBApplicationStartupReasonReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 617190391EB2B4DB00057990 /* UBApplicationStartupReasonReporter.m */; };
-		6171903E1EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6171903A1EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfo.h */; };
+		6171903E1EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6171903A1EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6171903F1EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6171903B1EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfo.m */; };
-		617190401EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfoProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 6171903C1EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfoProtocol.h */; };
+		617190401EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfoProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 6171903C1EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfoProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		618915D11EB2CFBC0000CBFA /* UBApplicationStartupReasonReporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C904001EB2C407008593BF /* UBApplicationStartupReasonReporterTests.m */; };
+		BECE33401F4D96D100B359CA /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = BECE333F1F4D96D100B359CA /* README.md */; };
 		EFE5A1DC3A2E549D97F0F11D /* libPods-StartupReasonReporterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16380E96F12BA873DFC03D2D /* libPods-StartupReasonReporterTests.a */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		6171903B1EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UBApplicationStartupReasonReporterPriorRunInfo.m; path = StartupReasonReporterPriorRunInfo/UBApplicationStartupReasonReporterPriorRunInfo.m; sourceTree = "<group>"; };
 		6171903C1EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfoProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UBApplicationStartupReasonReporterPriorRunInfoProtocol.h; path = StartupReasonReporter/UBApplicationStartupReasonReporterPriorRunInfoProtocol.h; sourceTree = "<group>"; };
 		61C904001EB2C407008593BF /* UBApplicationStartupReasonReporterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBApplicationStartupReasonReporterTests.m; sourceTree = "<group>"; };
+		BECE333F1F4D96D100B359CA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E22553A93029746B1DFEE2B2 /* Pods-StartupReasonReporterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StartupReasonReporterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StartupReasonReporterTests/Pods-StartupReasonReporterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E3F8FA038F187F2ACA8DFC72 /* Pods-StartupReasonReporterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StartupReasonReporterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StartupReasonReporterTests/Pods-StartupReasonReporterTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +79,7 @@
 		3AE8A2261EA14A4E00AA6B9E = {
 			isa = PBXGroup;
 			children = (
+				BECE333F1F4D96D100B359CA /* README.md */,
 				3AE8A2321EA14A4E00AA6B9E /* StartupReasonReporter */,
 				3AE8A23D1EA14A4E00AA6B9E /* StartupReasonReporterTests */,
 				3AE8A2311EA14A4E00AA6B9E /* Products */,
@@ -289,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BECE33401F4D96D100B359CA /* README.md in Sources */,
 				6171903D1EB2B4DB00057990 /* UBApplicationStartupReasonReporter.m in Sources */,
 				6171903F1EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfo.m in Sources */,
 			);
