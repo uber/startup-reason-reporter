@@ -36,8 +36,8 @@ BOOL crashedOnPriorLaunch = ...
 id<UBApplicationStartupReasonReporterPriorRunInfoProtocol> runInfo = ...
 
 // Initialize the startup reason reporter
-UBApplicationStartupReasonReporter *applicationStartupReasonReporter = [[UBApplicationStartupReasonReporter alloc] initWithNotificationCenter:[NSNotificationCenter defaultCenter]
-        previousRunDidCrash:self.crashReporter.crashDetected
+UBApplicationStartupReasonReporter *startupReasonReporter = [[UBApplicationStartupReasonReporter alloc] initWithNotificationCenter:[NSNotificationCenter defaultCenter]
+        previousRunDidCrash:crashedOnPriorLaunch
         previousRunInfo:runInfo
         debugging:[UBBuildType isDebugBuild]];
 
@@ -91,7 +91,7 @@ pod 'StartupReasonReporter/Core', '~> 0.1'
 To integrate the StartupReasonReporter into your project using Carthage add the following to your `Cartfile`:
 
 ```ruby
-github "uber/StartupReasonReporter" ~> 0.1
+github "uber/startup-reason-reporter" ~> 0.1
 ```
 
 ## Contributions
