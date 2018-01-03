@@ -79,13 +79,13 @@ UBStartupReason const UBStartupReasonOutOfMemory = @"out_of_memory";
 To integrate the StartupReasonReporter into your project add the following to your `Podfile`:
 
 ```ruby
-pod 'StartupReasonReporter', '~> 0.2'
+pod 'StartupReasonReporter', '~> 0.2.0'
 ```
 
 To integrate only the `UBApplicationStartupReasonReporterPriorRunInfoProtocol` protocol, but not the implementation, add the following to your `Podfile`:
 
 ```ruby
-pod 'StartupReasonReporter/Core', '~> 0.2'
+pod 'StartupReasonReporter/Core', '~> 0.2.0'
 ```
 
 #### Carthage
@@ -93,7 +93,7 @@ pod 'StartupReasonReporter/Core', '~> 0.2'
 To integrate the StartupReasonReporter into your project using Carthage add the following to your `Cartfile`:
 
 ```ruby
-github "uber/startup-reason-reporter" ~> 0.2
+github "uber/startup-reason-reporter" ~> 0.2.0
 ```
 
 ## Contributions

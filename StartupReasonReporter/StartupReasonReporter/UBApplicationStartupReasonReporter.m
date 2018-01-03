@@ -62,7 +62,6 @@ UBStartupReason const UBStartupReasonOutOfMemory = @"out_of_memory";
         _previousAppVersion = _currentAppVersion;
         _currentOSVersion = [[UIDevice currentDevice] systemVersion];
         _previousOSVersion = _currentOSVersion;
-        // Application state will be background when the app is launched in the background via silent push
         _backgrounded = applicationState == UIApplicationStateBackground;
         _didTerminate = NO;
         _currentBootTime = [UBApplicationStartupReasonReporter systemBootTime];
