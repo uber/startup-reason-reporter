@@ -17,10 +17,11 @@ let crashedOnPriorLaunch = ...
 let previousRunInfo: ApplicationStartupReasonReporterProtocol = ...
 
 // Initialize the startup reason reporter
-let startupReasonReporter = ApplicationStartupReasonReporter(notificationCenter: NotificationCenter.default, 
-previousRunDidCrash: crashedOnPreviousLaunch, 
-previousRunInfo: previousRunInfo, 
-debugging: false)
+let startupReasonReporter = ApplicationStartupReasonReporter(notificationCenter: NotificationCenter.default,
+previousRunDidCrash: crashedOnPreviousLaunch,
+previousRunInfo: previousRunInfo,
+debugging: false,
+applicationState: UIApplication.shared.applicationState)
 
 // Profit
 let startupReason =  startupReasonReporter.startupReason
@@ -39,7 +40,8 @@ id<UBApplicationStartupReasonReporterPriorRunInfoProtocol> runInfo = ...
 UBApplicationStartupReasonReporter *startupReasonReporter = [[UBApplicationStartupReasonReporter alloc] initWithNotificationCenter:[NSNotificationCenter defaultCenter]
         previousRunDidCrash:crashedOnPriorLaunch
         previousRunInfo:runInfo
-        debugging:[UBBuildType isDebugBuild]];
+        debugging:[UBBuildType isDebugBuild]]
+        applicationState:[UIApplication sharedApplication].applicationState;
 
 // Profit
 UBStartupReason startupReason = startupReasonReporter.startupReason
@@ -77,13 +79,13 @@ UBStartupReason const UBStartupReasonOutOfMemory = @"out_of_memory";
 To integrate the StartupReasonReporter into your project add the following to your `Podfile`:
 
 ```ruby
-pod 'StartupReasonReporter', '~> 0.1'
+pod 'StartupReasonReporter', '~> 0.2.0'
 ```
 
 To integrate only the `UBApplicationStartupReasonReporterPriorRunInfoProtocol` protocol, but not the implementation, add the following to your `Podfile`:
 
 ```ruby
-pod 'StartupReasonReporter/Core', '~> 0.1'
+pod 'StartupReasonReporter/Core', '~> 0.2.0'
 ```
 
 #### Carthage
@@ -91,7 +93,7 @@ pod 'StartupReasonReporter/Core', '~> 0.1'
 To integrate the StartupReasonReporter into your project using Carthage add the following to your `Cartfile`:
 
 ```ruby
-github "uber/startup-reason-reporter" ~> 0.1
+github "uber/startup-reason-reporter" ~> 0.2.0
 ```
 
 ## Contributions

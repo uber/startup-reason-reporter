@@ -7,6 +7,15 @@
 #import <OCMock/OCMock.h>
 
 
+@interface UBApplicationStartupReasonReporter ()
+
+- (void)applicationDidBecomeActive;
+- (void)applicationWillResignActive;
+- (void)applicationWillTerminate;
+
+@end
+
+
 @interface UBApplicationStartupReasonReporterTests : XCTestCase
 
 @property (nonatomic) NSNotificationCenter *notificationCenter;
@@ -73,7 +82,8 @@
         initWithNotificationCenter:(NSNotificationCenter *)notificationCenterMock
                previousRunDidCrash:NO
                    previousRunInfo:previousStartupMock
-                         debugging:NO];
+                         debugging:NO
+                  applicationState:UIApplicationStateInactive];
 
     OCMVerifyAll(notificationCenterMock);
     XCTAssertNotNil(reporter);
@@ -96,12 +106,35 @@
         initWithNotificationCenter:self.notificationCenter
                previousRunDidCrash:NO
                    previousRunInfo:previousStartupMock
-                         debugging:NO];
+                         debugging:NO
+                  applicationState:UIApplicationStateInactive];
 
     OCMVerifyAll(previousStartupMock);
     XCTAssertNotNil(reporter);
 }
 
+- (void)test_init_persistsDefaultValuesWhenBackground
+{
+    id previousStartupMock = OCMProtocolMock(@protocol(UBApplicationStartupReasonReporterPriorRunInfoProtocol));
+
+    OCMExpect([previousStartupMock setBackgrounded:YES]);
+    OCMExpect([previousStartupMock setPreviousAppVersion:@"2.0"]);
+    OCMExpect([previousStartupMock setPreviousOSVersion:@"9.0"]);
+    OCMExpect([previousStartupMock setDidTerminate:NO]);
+    OCMExpect([previousStartupMock setPreviousBootTime:[UBApplicationStartupReasonReporter systemBootTime]]);
+
+    OCMExpect([previousStartupMock persist]);
+
+    UBApplicationStartupReasonReporter *reporter = [[UBApplicationStartupReasonReporter alloc]
+        initWithNotificationCenter:self.notificationCenter
+               previousRunDidCrash:NO
+                   previousRunInfo:previousStartupMock
+                         debugging:NO
+                  applicationState:UIApplicationStateBackground];
+
+    OCMVerifyAll(previousStartupMock);
+    XCTAssertNotNil(reporter);
+}
 
 - (void)test_init_whenBackgroundingOrForegrounding_persistsChange
 {
@@ -111,7 +144,8 @@
         initWithNotificationCenter:self.notificationCenter
                previousRunDidCrash:NO
                    previousRunInfo:previousStartupMock
-                         debugging:NO];
+                         debugging:NO
+                  applicationState:UIApplicationStateInactive];
     XCTAssertNotNil(reporter);
 
     OCMExpect([previousStartupMock setBackgrounded:YES]);
@@ -139,7 +173,8 @@
         initWithNotificationCenter:self.notificationCenter
                previousRunDidCrash:NO
                    previousRunInfo:previousStartupMock
-                         debugging:NO];
+                         debugging:NO
+                  applicationState:UIApplicationStateInactive];
     XCTAssertNotNil(reporter);
     [self.notificationCenter postNotificationName:UIApplicationWillResignActiveNotification object:nil];
 
@@ -161,7 +196,8 @@
         initWithNotificationCenter:self.notificationCenter
                previousRunDidCrash:NO
                    previousRunInfo:previousStartupMock
-                         debugging:NO];
+                         debugging:NO
+                  applicationState:UIApplicationStateInactive];
     XCTAssertEqualObjects(reporter.startupReason, UBStartupReasonFirstTime);
 
     [self verifyStartupReasonIs:UBStartupReasonAppUpgrade
@@ -257,7 +293,8 @@
         initWithNotificationCenter:self.notificationCenter
                previousRunDidCrash:previousRunDidCrash
                    previousRunInfo:previousStartupMock
-                         debugging:debugging];
+                         debugging:debugging
+                  applicationState:UIApplicationStateInactive];
 
     XCTAssertEqualObjects(startupReason, reporter.startupReason);
 }

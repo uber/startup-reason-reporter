@@ -64,11 +64,13 @@ NS_SWIFT_NAME(ApplicationStartupReasonReporter)
  @param previousRunDidCrash Indicates whether the prior run was a crash
  @param previousRunInfo An implementation of UBApplicationStartupReasonReporterPriorRunInfoProtocol which contains information about the prior run and will store information about the current run.
  @param debugging True if this app run is for debugging, false otherwise.  This is useful if the app is being developed in the simulator, for instance.
+ @param applicationState The current state of the application. This to tell if the app is being launched in the background.
  */
 - (instancetype)initWithNotificationCenter:(NSNotificationCenter *)notificationCenter
                        previousRunDidCrash:(BOOL)previousRunDidCrash
                            previousRunInfo:(id<UBApplicationStartupReasonReporterPriorRunInfoProtocol>)previousRunInfo
-                                 debugging:(BOOL)debugging;
+                                 debugging:(BOOL)debugging
+                          applicationState:(UIApplicationState)applicationState;
 
 @end
 

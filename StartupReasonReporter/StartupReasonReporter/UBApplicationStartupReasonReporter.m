@@ -50,7 +50,7 @@ UBStartupReason const UBStartupReasonOutOfMemory = @"out_of_memory";
     return 0;
 }
 
-- (instancetype)initWithNotificationCenter:(NSNotificationCenter *)notificationCenter previousRunDidCrash:(BOOL)previousRunDidCrash previousRunInfo:(id<UBApplicationStartupReasonReporterPriorRunInfoProtocol>)previousRunInfo debugging:(BOOL)debugging
+- (instancetype)initWithNotificationCenter:(NSNotificationCenter *)notificationCenter previousRunDidCrash:(BOOL)previousRunDidCrash previousRunInfo:(id<UBApplicationStartupReasonReporterPriorRunInfoProtocol>)previousRunInfo debugging:(BOOL)debugging applicationState:(UIApplicationState)applicationState
 {
     self = [super init];
     if (self) {
@@ -62,7 +62,7 @@ UBStartupReason const UBStartupReasonOutOfMemory = @"out_of_memory";
         _previousAppVersion = _currentAppVersion;
         _currentOSVersion = [[UIDevice currentDevice] systemVersion];
         _previousOSVersion = _currentOSVersion;
-        _backgrounded = NO;
+        _backgrounded = applicationState == UIApplicationStateBackground;
         _didTerminate = NO;
         _currentBootTime = [UBApplicationStartupReasonReporter systemBootTime];
         _previousBootTime = 0;
