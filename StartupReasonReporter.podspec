@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'StartupReasonReporter'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.summary          = 'Provides the reason that an iOS application has launched.'
 
 # This description is used to generate tags and improve search results.
@@ -25,9 +25,9 @@ The Startup Reason Reporter provides developers the the reason that an iOS appli
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.source           = { :git => 'https://github.com/uber/startup-reason-reporter.git', :tag => s.version.to_s }
   s.author           = "Uber"
-  
+
   s.ios.deployment_target = '8.0'
-  
+
   s.subspec 'Core' do |core|
     core.source_files = 'StartupReasonReporter/StartupReasonReporter/*'
   end

@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+Version 0.2
+----------------------------
+
+* Expose API to set initial application state
+
+
 Version 0.1.1
 ----------------------------
 
