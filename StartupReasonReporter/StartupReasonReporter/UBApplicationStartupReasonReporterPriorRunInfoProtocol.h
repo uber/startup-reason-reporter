@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2017 Uber Technologies, Inc. All rights reserved.
+//  Copyright (c) Uber Technologies, Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

@@ -1,27 +1,26 @@
 //
-//  Copyright (c) 2016-2017 Uber Technologies, Inc. All rights reserved.
+//  Copyright (c) Uber Technologies, Inc. All rights reserved.
 //
 
 #import "UBApplicationStartupReasonReporter.h"
+#import "UBApplicationStartupReasonReporterNotificationRelay.h"
+#import "UBApplicationStartupReasonReporterPriorRunInfo.h"
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
 
 
-@interface UBApplicationStartupReasonReporter ()
-
-- (void)applicationDidBecomeActive;
-- (void)applicationWillResignActive;
-- (void)applicationWillTerminate;
+@interface UBApplicationStartupReasonReporter () <UBApplicationStartupReasonReporterNotificationRelaySubscriber>
 
 @end
 
 
 @interface UBApplicationStartupReasonReporterTests : XCTestCase
 
-@property (nonatomic) NSNotificationCenter *notificationCenter;
-
 @property (nonatomic) NSString *currentAppVersion;
 @property (nonatomic) NSString *currentOSVersion;
+@property (nonatomic) id sharedApplicationMock;
+@property (nonatomic) id previousStartupMock;
+@property (nonatomic) id notificationRelayMock;
 
 @property (nonatomic) NSArray *mocks;
 
@@ -36,7 +35,6 @@
     [super setUp];
     self.currentAppVersion = @"2.0";
     self.currentOSVersion = @"9.0";
-    self.notificationCenter = [[NSNotificationCenter alloc] init];
 
     id mainBundleMock = OCMPartialMock([NSBundle mainBundle]);
     OCMStub([mainBundleMock infoDictionary]).andReturn(@{ @"CFBundleVersion" : self.currentAppVersion });
@@ -48,7 +46,14 @@
     id UIDeviceMock = OCMClassMock([UIDevice class]);
     OCMStub([UIDeviceMock currentDevice]).andReturn(deviceMock);
 
-    self.mocks = @[ mainBundleMock, NSBundleMock, deviceMock, UIDeviceMock ];
+    self.sharedApplicationMock = OCMPartialMock([UIApplication alloc]);
+    id UIApplicationMock = OCMClassMock([UIApplication class]);
+    OCMStub([UIApplicationMock sharedApplication]).andReturn(self.sharedApplicationMock);
+
+    self.previousStartupMock = OCMProtocolMock(@protocol(UBApplicationStartupReasonReporterPriorRunInfoProtocol));
+    self.notificationRelayMock = OCMProtocolMock(@protocol(UBApplicationStartupReasonReporterNotificationRelayProtocol));
+
+    self.mocks = @[ mainBundleMock, NSBundleMock, deviceMock, UIDeviceMock, self.sharedApplicationMock, UIApplicationMock, self.previousStartupMock, self.notificationRelayMock ];
 }
 
 - (void)tearDown
@@ -60,144 +65,85 @@
     }
 }
 
-- (void)test_init_subscribedToNotificationCenter
+- (void)test_init_notificationRelaySubscribe
 {
-    id notificationCenterMock = OCMPartialMock(self.notificationCenter);
+    id notificationRelayMock = OCMProtocolMock(@protocol(UBApplicationStartupReasonReporterNotificationRelayProtocol));
+    OCMStub([self.sharedApplicationMock applicationState]).andReturn(UIApplicationStateActive);
 
-    OCMExpect([notificationCenterMock addObserver:OCMOCK_ANY
-                                         selector:@selector(applicationDidBecomeActive)
-                                             name:UIApplicationDidBecomeActiveNotification
-                                           object:nil]);
-    OCMExpect([notificationCenterMock addObserver:OCMOCK_ANY
-                                         selector:@selector(applicationWillResignActive)
-                                             name:UIApplicationWillResignActiveNotification
-                                           object:nil]);
-    OCMExpect([notificationCenterMock addObserver:OCMOCK_ANY
-                                         selector:@selector(applicationWillTerminate)
-                                             name:UIApplicationWillTerminateNotification
-                                           object:nil]);
+    OCMExpect([notificationRelayMock addSubscriber:OCMOCK_ANY]);
 
     id<UBApplicationStartupReasonReporterPriorRunInfoProtocol> previousStartupMock = OCMProtocolMock(@protocol(UBApplicationStartupReasonReporterPriorRunInfoProtocol));
     UBApplicationStartupReasonReporter *reporter = [[UBApplicationStartupReasonReporter alloc]
-        initWithNotificationCenter:(NSNotificationCenter *)notificationCenterMock
-               previousRunDidCrash:NO
-                   previousRunInfo:previousStartupMock
-                         debugging:NO
-                  applicationState:UIApplicationStateInactive];
+        initWithPreviousRunDidCrash:NO
+                    previousRunInfo:previousStartupMock
+                  notificationRelay:notificationRelayMock
+                          debugging:NO];
 
-    OCMVerifyAll(notificationCenterMock);
-    XCTAssertNotNil(reporter);
-    [notificationCenterMock stopMocking];
-}
-
-- (void)test_init_persistsDefaultValues
-{
-    id previousStartupMock = OCMProtocolMock(@protocol(UBApplicationStartupReasonReporterPriorRunInfoProtocol));
-
-    OCMExpect([previousStartupMock setBackgrounded:NO]);
-    OCMExpect([previousStartupMock setPreviousAppVersion:@"2.0"]);
-    OCMExpect([previousStartupMock setPreviousOSVersion:@"9.0"]);
-    OCMExpect([previousStartupMock setDidTerminate:NO]);
-    OCMExpect([previousStartupMock setPreviousBootTime:[UBApplicationStartupReasonReporter systemBootTime]]);
-
-    OCMExpect([previousStartupMock persist]);
-
-    UBApplicationStartupReasonReporter *reporter = [[UBApplicationStartupReasonReporter alloc]
-        initWithNotificationCenter:self.notificationCenter
-               previousRunDidCrash:NO
-                   previousRunInfo:previousStartupMock
-                         debugging:NO
-                  applicationState:UIApplicationStateInactive];
-
-    OCMVerifyAll(previousStartupMock);
-    XCTAssertNotNil(reporter);
-}
-
-- (void)test_init_persistsDefaultValuesWhenBackground
-{
-    id previousStartupMock = OCMProtocolMock(@protocol(UBApplicationStartupReasonReporterPriorRunInfoProtocol));
-
-    OCMExpect([previousStartupMock setBackgrounded:YES]);
-    OCMExpect([previousStartupMock setPreviousAppVersion:@"2.0"]);
-    OCMExpect([previousStartupMock setPreviousOSVersion:@"9.0"]);
-    OCMExpect([previousStartupMock setDidTerminate:NO]);
-    OCMExpect([previousStartupMock setPreviousBootTime:[UBApplicationStartupReasonReporter systemBootTime]]);
-
-    OCMExpect([previousStartupMock persist]);
-
-    UBApplicationStartupReasonReporter *reporter = [[UBApplicationStartupReasonReporter alloc]
-        initWithNotificationCenter:self.notificationCenter
-               previousRunDidCrash:NO
-                   previousRunInfo:previousStartupMock
-                         debugging:NO
-                  applicationState:UIApplicationStateBackground];
-
-    OCMVerifyAll(previousStartupMock);
     XCTAssertNotNil(reporter);
 }
 
 - (void)test_init_whenBackgroundingOrForegrounding_persistsChange
 {
-    id previousStartupMock = OCMProtocolMock(@protocol(UBApplicationStartupReasonReporterPriorRunInfoProtocol));
+    id notificationRelay = [[UBApplicationStartupReasonReporterNotificationRelay alloc] init];
+    OCMStub([self.sharedApplicationMock applicationState]).andReturn(UIApplicationStateActive);
 
     UBApplicationStartupReasonReporter *reporter = [[UBApplicationStartupReasonReporter alloc]
-        initWithNotificationCenter:self.notificationCenter
-               previousRunDidCrash:NO
-                   previousRunInfo:previousStartupMock
-                         debugging:NO
-                  applicationState:UIApplicationStateInactive];
+        initWithPreviousRunDidCrash:NO
+                    previousRunInfo:self.previousStartupMock
+                  notificationRelay:notificationRelay
+                          debugging:NO];
     XCTAssertNotNil(reporter);
 
-    OCMExpect([previousStartupMock setBackgrounded:YES]);
-    OCMExpect([previousStartupMock setPreviousAppVersion:@"2.0"]);
-    OCMExpect([previousStartupMock setPreviousOSVersion:@"9.0"]);
-    OCMExpect([previousStartupMock setDidTerminate:NO]);
-    OCMExpect([previousStartupMock setPreviousBootTime:[UBApplicationStartupReasonReporter systemBootTime]]);
-    OCMExpect([previousStartupMock persist]);
+    OCMExpect([self.previousStartupMock setBackgrounded:YES]);
+    OCMExpect([self.previousStartupMock setPreviousAppVersion:@"2.0"]);
+    OCMExpect([self.previousStartupMock setPreviousOSVersion:@"9.0"]);
+    OCMExpect([self.previousStartupMock setDidTerminate:NO]);
+    OCMExpect([self.previousStartupMock setPreviousBootTime:[UBApplicationStartupReasonReporter systemBootTime]]);
+    OCMExpect([self.previousStartupMock persist]);
 
-    [self.notificationCenter postNotificationName:UIApplicationWillResignActiveNotification object:nil];
-    OCMVerifyAll(previousStartupMock);
+    [notificationRelay updateApplicationStateNotification:[NSNotification notificationWithName:UIApplicationWillResignActiveNotification object:nil]];
+    OCMVerifyAll(self.previousStartupMock);
 
-    OCMExpect([previousStartupMock setBackgrounded:NO]);
-    OCMExpect([previousStartupMock persist]);
+    OCMExpect([self.previousStartupMock setBackgrounded:NO]);
+    OCMExpect([self.previousStartupMock persist]);
 
-    [self.notificationCenter postNotificationName:UIApplicationDidBecomeActiveNotification object:nil];
-    OCMVerifyAll(previousStartupMock);
+    [notificationRelay updateApplicationStateNotification:[NSNotification notificationWithName:UIApplicationDidBecomeActiveNotification object:nil]];
+    OCMVerifyAll(self.previousStartupMock);
 }
 
 - (void)test_init_whenTerminating_persistsChange
 {
-    id previousStartupMock = OCMProtocolMock(@protocol(UBApplicationStartupReasonReporterPriorRunInfoProtocol));
+    id notificationRelay = [[UBApplicationStartupReasonReporterNotificationRelay alloc] init];
+    OCMStub([self.sharedApplicationMock applicationState]).andReturn(UIApplicationStateActive);
 
     UBApplicationStartupReasonReporter *reporter = [[UBApplicationStartupReasonReporter alloc]
-        initWithNotificationCenter:self.notificationCenter
-               previousRunDidCrash:NO
-                   previousRunInfo:previousStartupMock
-                         debugging:NO
-                  applicationState:UIApplicationStateInactive];
+        initWithPreviousRunDidCrash:NO
+                    previousRunInfo:self.previousStartupMock
+                  notificationRelay:notificationRelay
+                          debugging:NO];
     XCTAssertNotNil(reporter);
-    [self.notificationCenter postNotificationName:UIApplicationWillResignActiveNotification object:nil];
+    [notificationRelay updateApplicationStateNotification:[NSNotification notificationWithName:UIApplicationWillResignActiveNotification object:nil]];
 
-    OCMExpect([previousStartupMock setBackgrounded:YES]);
-    OCMExpect([previousStartupMock setPreviousAppVersion:@"2.0"]);
-    OCMExpect([previousStartupMock setPreviousOSVersion:@"9.0"]);
-    OCMExpect([previousStartupMock setDidTerminate:YES]);
-    OCMExpect([previousStartupMock setPreviousBootTime:[UBApplicationStartupReasonReporter systemBootTime]]);
-    OCMExpect([previousStartupMock persist]);
+    OCMExpect([self.previousStartupMock setBackgrounded:YES]);
+    OCMExpect([self.previousStartupMock setPreviousAppVersion:@"2.0"]);
+    OCMExpect([self.previousStartupMock setPreviousOSVersion:@"9.0"]);
+    OCMExpect([self.previousStartupMock setDidTerminate:YES]);
+    OCMExpect([self.previousStartupMock setPreviousBootTime:[UBApplicationStartupReasonReporter systemBootTime]]);
+    OCMExpect([self.previousStartupMock persist]);
 
-    [self.notificationCenter postNotificationName:UIApplicationWillTerminateNotification object:nil];
-    OCMVerifyAll(previousStartupMock);
+    [notificationRelay updateApplicationStateNotification:[NSNotification notificationWithName:UIApplicationWillTerminateNotification object:nil]];
+    OCMVerifyAll(self.previousStartupMock);
 }
 
 - (void)test_init_correctStartupReason
 {
-    id previousStartupMock = OCMProtocolMock(@protocol(UBApplicationStartupReasonReporterPriorRunInfoProtocol));
+    OCMStub([self.sharedApplicationMock applicationState]).andReturn(UIApplicationStateActive);
+
     UBApplicationStartupReasonReporter *reporter = [[UBApplicationStartupReasonReporter alloc]
-        initWithNotificationCenter:self.notificationCenter
-               previousRunDidCrash:NO
-                   previousRunInfo:previousStartupMock
-                         debugging:NO
-                  applicationState:UIApplicationStateInactive];
+        initWithPreviousRunDidCrash:NO
+                    previousRunInfo:self.previousStartupMock
+                  notificationRelay:self.notificationRelayMock
+                          debugging:NO];
     XCTAssertEqualObjects(reporter.startupReason, UBStartupReasonFirstTime);
 
     [self verifyStartupReasonIs:UBStartupReasonAppUpgrade
@@ -283,6 +229,7 @@
                     debugging:(BOOL)debugging
 {
     id previousStartupMock = OCMProtocolMock(@protocol(UBApplicationStartupReasonReporterPriorRunInfoProtocol));
+    id notificationRelayMock = OCMProtocolMock(@protocol(UBApplicationStartupReasonReporterNotificationRelayProtocol));
     OCMStub([previousStartupMock hasData]).andReturn(YES);
     OCMStub([previousStartupMock backgrounded]).andReturn(backgrounded);
     OCMStub([previousStartupMock previousAppVersion]).andReturn(prevAppVersion);
@@ -290,11 +237,10 @@
     OCMStub([previousStartupMock didTerminate]).andReturn(terminate);
     OCMStub([previousStartupMock previousBootTime]).andReturn(prevBootTime);
     UBApplicationStartupReasonReporter *reporter = [[UBApplicationStartupReasonReporter alloc]
-        initWithNotificationCenter:self.notificationCenter
-               previousRunDidCrash:previousRunDidCrash
-                   previousRunInfo:previousStartupMock
-                         debugging:debugging
-                  applicationState:UIApplicationStateInactive];
+        initWithPreviousRunDidCrash:previousRunDidCrash
+                    previousRunInfo:previousStartupMock
+                  notificationRelay:notificationRelayMock
+                          debugging:debugging];
 
     XCTAssertEqualObjects(startupReason, reporter.startupReason);
 }

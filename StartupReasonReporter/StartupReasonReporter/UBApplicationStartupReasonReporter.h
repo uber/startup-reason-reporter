@@ -1,10 +1,11 @@
 //
-//  Copyright (c) 2016-2017 Uber Technologies, Inc. All rights reserved.
+//  Copyright (c) Uber Technologies, Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import "UBApplicationStartupReasonReporterNotificationRelay.h"
 #import "UBApplicationStartupReasonReporterPriorRunInfoProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -60,17 +61,15 @@ NS_SWIFT_NAME(ApplicationStartupReasonReporter)
 /**
  Initializes a new UBApplicationStartupReasonReporter.
 
- @param notificationCenter The current NSNotificationCenter
  @param previousRunDidCrash Indicates whether the prior run was a crash
  @param previousRunInfo An implementation of UBApplicationStartupReasonReporterPriorRunInfoProtocol which contains information about the prior run and will store information about the current run.
+ @param notificationRelay the relay which emits application state update notifications.
  @param debugging True if this app run is for debugging, false otherwise.  This is useful if the app is being developed in the simulator, for instance.
- @param applicationState The current state of the application. This to tell if the app is being launched in the background.
  */
-- (instancetype)initWithNotificationCenter:(NSNotificationCenter *)notificationCenter
-                       previousRunDidCrash:(BOOL)previousRunDidCrash
-                           previousRunInfo:(id<UBApplicationStartupReasonReporterPriorRunInfoProtocol>)previousRunInfo
-                                 debugging:(BOOL)debugging
-                          applicationState:(UIApplicationState)applicationState;
+- (instancetype)initWithPreviousRunDidCrash:(BOOL)previousRunDidCrash
+                            previousRunInfo:(id<UBApplicationStartupReasonReporterPriorRunInfoProtocol>)previousRunInfo
+                          notificationRelay:(id<UBApplicationStartupReasonReporterNotificationRelayProtocol>)notificationRelay
+                                  debugging:(BOOL)debugging;
 
 @end
 

@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2016-2017 Uber Technologies, Inc. All rights reserved.
+//  Copyright (c) Uber Technologies, Inc. All rights reserved.
 //
 
 #import "UBApplicationStartupReasonReporter.h"
@@ -17,9 +17,8 @@ UBStartupReason const UBStartupReasonRestart = @"restart";
 UBStartupReason const UBStartupReasonOutOfMemory = @"out_of_memory";
 
 
-@interface UBApplicationStartupReasonReporter ()
+@interface UBApplicationStartupReasonReporter () <UBApplicationStartupReasonReporterNotificationRelaySubscriber>
 
-@property (nonatomic) NSNotificationCenter *notificationCenter;
 @property (nonatomic) BOOL previousRunDidCrash;
 @property (nonatomic) BOOL debugging;
 
@@ -50,7 +49,10 @@ UBStartupReason const UBStartupReasonOutOfMemory = @"out_of_memory";
     return 0;
 }
 
-- (instancetype)initWithNotificationCenter:(NSNotificationCenter *)notificationCenter previousRunDidCrash:(BOOL)previousRunDidCrash previousRunInfo:(id<UBApplicationStartupReasonReporterPriorRunInfoProtocol>)previousRunInfo debugging:(BOOL)debugging applicationState:(UIApplicationState)applicationState
+- (instancetype)initWithPreviousRunDidCrash:(BOOL)previousRunDidCrash
+                            previousRunInfo:(id<UBApplicationStartupReasonReporterPriorRunInfoProtocol>)previousRunInfo
+                          notificationRelay:(id<UBApplicationStartupReasonReporterNotificationRelayProtocol>)notificationRelay
+                                  debugging:(BOOL)debugging
 {
     self = [super init];
     if (self) {
@@ -62,7 +64,7 @@ UBStartupReason const UBStartupReasonOutOfMemory = @"out_of_memory";
         _previousAppVersion = _currentAppVersion;
         _currentOSVersion = [[UIDevice currentDevice] systemVersion];
         _previousOSVersion = _currentOSVersion;
-        _backgrounded = applicationState == UIApplicationStateBackground;
+        _backgrounded = NO;
         _didTerminate = NO;
         _currentBootTime = [UBApplicationStartupReasonReporter systemBootTime];
         _previousBootTime = 0;
@@ -86,22 +88,14 @@ UBStartupReason const UBStartupReasonOutOfMemory = @"out_of_memory";
                 _previousBootTime = previousRunInfo.previousBootTime;
             }
             [self _detectStartupReason];
-            _didTerminate = NO;
-            _backgrounded = NO;
         }
+        _didTerminate = NO;
 
-        _notificationCenter = notificationCenter;
-        [_notificationCenter addObserver:self selector:@selector(applicationDidBecomeActive)
-                                    name:UIApplicationDidBecomeActiveNotification
-                                  object:nil];
-        [_notificationCenter addObserver:self selector:@selector(applicationWillResignActive)
-                                    name:UIApplicationWillResignActiveNotification
-                                  object:nil];
-        [_notificationCenter addObserver:self selector:@selector(applicationWillTerminate)
-                                    name:UIApplicationWillTerminateNotification
-                                  object:nil];
-
-        [self _persist];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.backgrounded = [UIApplication sharedApplication].applicationState != UIApplicationStateActive;
+            [self _persist];
+        });
+        [notificationRelay addSubscriber:self];
     }
     return self;
 }
@@ -144,31 +138,18 @@ UBStartupReason const UBStartupReasonOutOfMemory = @"out_of_memory";
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 }
 
-#pragma mark - Notifications
+#pragma mark - UBApplicationStartupReasonReporterNotificationRelaySubscriber
 
-- (void)applicationDidBecomeActive
+- (void)processNotification:(NSNotification *)notification
 {
-    self.backgrounded = NO;
+    if ([notification.name isEqualToString:UIApplicationDidBecomeActiveNotification]) {
+        self.backgrounded = NO;
+    } else if ([notification.name isEqualToString:UIApplicationWillResignActiveNotification]) {
+        self.backgrounded = YES;
+    } else if ([notification.name isEqualToString:UIApplicationWillTerminateNotification]) {
+        self.didTerminate = YES;
+    }
     [self _persist];
-}
-
-- (void)applicationWillResignActive
-{
-    self.backgrounded = YES;
-    [self _persist];
-}
-
-- (void)applicationWillTerminate
-{
-    self.didTerminate = YES;
-    [self _persist];
-}
-
-- (void)dealloc
-{
-    [self.notificationCenter removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
-    [self.notificationCenter removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
-    [self.notificationCenter removeObserver:self name:UIApplicationWillTerminateNotification object:nil];
 }
 
 @end
