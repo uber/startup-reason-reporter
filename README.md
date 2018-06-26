@@ -16,15 +16,32 @@ let crashedOnPriorLaunch = ...
 // Initialize a storage mechanism implementing UBApplicationStartupReasonReporterPriorRunInfoProtocol
 let previousRunInfo: ApplicationStartupReasonReporterProtocol = ...
 
+// Initialize the notification relay
+let notificationRelay = ApplicationStartupReasonReporterNotificationRelay()
+
 // Initialize the startup reason reporter
-let startupReasonReporter = ApplicationStartupReasonReporter(notificationCenter: NotificationCenter.default,
-previousRunDidCrash: crashedOnPreviousLaunch,
+let startupReasonReporter = ApplicationStartupReasonReporter(previousRunDidCrash: crashedOnPreviousLaunch,
 previousRunInfo: previousRunInfo,
-debugging: false,
-applicationState: UIApplication.shared.applicationState)
+notificationRelay: notificationRelay,
+debugging: false)
 
 // Profit
 let startupReason =  startupReasonReporter.startupReason
+
+// ...
+// In AppDelegate connect notification relay to app lifecycle methods
+
+public func applicationDidBecomeActive(_ application: UIApplication) {
+    notificationRelay.updateApplicationStateNotification(Notification(name: .UIApplicationDidBecomeActive))
+}
+
+public func applicationWillResignActive(_ application: UIApplication) {
+    notificationRelay.updateApplicationStateNotification(Notification(name: .UIApplicationWillResignActive))
+}
+
+public func applicationWillTerminate(_ application: UIApplication) {
+    notificationRelay.updateApplicationStateNotification(Notification(name: .UIApplicationWillTerminate))
+}
 ```
 
 Obj-C:
@@ -36,15 +53,35 @@ BOOL crashedOnPriorLaunch = ...
 // Initialize a storage mechanism implementing UBApplicationStartupReasonReporterPriorRunInfoProtocol
 id<UBApplicationStartupReasonReporterPriorRunInfoProtocol> runInfo = ...
 
+// Initialize the notification relay
+id<UBApplicationStartupReasonReporterNotificationRelayProtocol> = [[UBApplicationStartupReasonReporterNotificationRelay alloc] init]
+
 // Initialize the startup reason reporter
-UBApplicationStartupReasonReporter *startupReasonReporter = [[UBApplicationStartupReasonReporter alloc] initWithNotificationCenter:[NSNotificationCenter defaultCenter]
-        previousRunDidCrash:crashedOnPriorLaunch
+UBApplicationStartupReasonReporter *startupReasonReporter = [[UBApplicationStartupReasonReporter alloc] initWithPreviousRunDidCrash:crashedOnPriorLaunch
         previousRunInfo:runInfo
-        debugging:[UBBuildType isDebugBuild]]
-        applicationState:[UIApplication sharedApplication].applicationState;
+        notificationRelay: notificationRelay
+        debugging:[UBBuildType isDebugBuild]];
 
 // Profit
 UBStartupReason startupReason = startupReasonReporter.startupReason
+
+// ...
+// In AppDelegate connect notification relay to app lifecycle methods
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [self.notificationRelay updateApplicationStateNotification:[NSNotification notificationWithName:UIApplicationDidBecomeActiveNotification object:nil]];
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    [self.notificationRelay updateApplicationStateNotification:[NSNotification notificationWithName:UIApplicationWillResignActiveNotification object:nil]];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    [self.notificationRelay updateApplicationStateNotification:[NSNotification notificationWithName:UIApplicationWillTerminateNotification object:nil]];
+}
 ```
 
 ## Introduction
@@ -53,11 +90,11 @@ The UBStartupReasonReporter is based on the general idea that applications may t
 
 Through process of elimination, the UBStartupReasonReporter can detect important events such as OOM crashes and app upgrades.  The full list of possible startup reasons is described below.
 
-Critically, the reported startup reason is only as accurate as the the data that is provided to it.  For instance, some crash detection mechanisms may not encompass all forms of crashes, which may throw off the reported reason.
+Critically, the reported startup reason is only as accurate as the the data that is provided to it.  For instance, some crash detection mechanisms may not encompass all forms of crashes, which may throw off the reported reason.  Additionally we found that application state notifications are not always delivered, or given time to execute unless you hook into the first notification emitted by the OS, in the corresponding AppDelegate method. This is why we provide a notification relay to easily hook into these lifecycle events.
 
 Our process for detecting various startup reasons is detailed by Ali Ansari and Grzegorz Pstrucha in this blog post: [Reducing FOOMs in the iOS app](https://code.facebook.com/posts/1146930688654547/reducing-fooms-in-the-facebook-ios-app/)
 
-In order for detection to work, you must provide a class that implements prior run storage and conforms to UBApplicationStartupReasonReporterPriorRunInfoProtocol.  We provide one such class, backed by NSUserDefaults, in UBApplicationStartupReasonReporterPriorRunInfo, though you may also wish to implement your own version that is backed by your preferred storage mechanism.
+In order for detection to work, you must provide a class that implements prior run storage and conforms to UBApplicationStartupReasonReporterPriorRunInfoProtocol.  We provide one such class, backed by the file system using JSON encoding, in UBApplicationStartupReasonReporterPriorRunInfo, though you may also wish to implement your own version that is backed by your preferred storage mechanism.
 
 Possible startup reasons are as follows:
 

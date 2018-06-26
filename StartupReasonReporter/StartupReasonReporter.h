@@ -7,6 +7,7 @@
 
 #import "UBApplicationStartupReasonReporterPriorRunInfoProtocol.h"
 #import "UBApplicationStartupReasonReporter.h"
+#import "UBApplicationStartupReasonReporterNotificationRelay.h"
 #import "UBApplicationStartupReasonReporterPriorRunInfo.h"
 
 

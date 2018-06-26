@@ -1,24 +1,23 @@
 //
-//  Copyright (c) 2017 Uber Technologies, Inc. All rights reserved.
+//  Copyright (c) Uber Technologies, Inc. All rights reserved.
 //
 
 #import "UBApplicationStartupReasonReporterPriorRunInfoProtocol.h"
 
 #import <Foundation/Foundation.h>
 
+
 /**
  An NSUserDefaults based implementation of UBApplicationStartupReasonReporterPriorRunInfoProtocol
  */
 NS_SWIFT_NAME(ApplicationStartupReasonReporterPriorRunInfo)
-
 @interface UBApplicationStartupReasonReporterPriorRunInfo : NSObject <UBApplicationStartupReasonReporterPriorRunInfoProtocol>
 
 /**
- Initializes a new UBApplicationStartupReasonReporterPriorRunInfo
-
- @param userDefaults The current user defaults
+ *  Returns the prior run information stored to disk at the given directory URL.
+ *  @param directoryURL The directory to use to to store the startup reason data.
+ *  @return the previous startup reason data if it was present on disk, or empty startup reason object.
  */
-- (nonnull instancetype)initWithUserDefaults:(nonnull NSUserDefaults *)userDefaults;
++ (nonnull instancetype)priorRunAtDirectoryURL:(nullable NSURL *)directoryURL;
 
 @end
-

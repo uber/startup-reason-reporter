@@ -2,6 +2,11 @@ Changelog
 =========
 
 
+Version 0.3.0
+----------------------------
+
+* Change notification handling and storage layer to improve OOM accuracy.
+
 Version 0.2.0
 ----------------------------
 

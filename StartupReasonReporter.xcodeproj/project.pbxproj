@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36A86CDE20BE2DDD00E61398 /* UBApplicationStartupReasonReporterNotificationRelay.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A86CDC20BE2DDD00E61398 /* UBApplicationStartupReasonReporterNotificationRelay.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		36A86CDF20BE2DDD00E61398 /* UBApplicationStartupReasonReporterNotificationRelay.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A86CDD20BE2DDD00E61398 /* UBApplicationStartupReasonReporterNotificationRelay.m */; };
+		36A86CE220BE2DFB00E61398 /* UBApplicationStartupReasonReporterNotificationRelayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A86CE020BE2DFB00E61398 /* UBApplicationStartupReasonReporterNotificationRelayTests.m */; };
+		36A86CE320BE2DFB00E61398 /* UBApplicationStartupReasonReporterPriorRunInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A86CE120BE2DFB00E61398 /* UBApplicationStartupReasonReporterPriorRunInfoTests.m */; };
 		3A096D351EB7DEBD00F7DF5B /* StartupReasonReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A096D341EB7DE5C00F7DF5B /* StartupReasonReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AE8A23A1EA14A4E00AA6B9E /* StartupReasonReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE8A2301EA14A4E00AA6B9E /* StartupReasonReporter.framework */; };
 		617190381EB2B47400057990 /* UBApplicationStartupReasonReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 617190371EB2B47400057990 /* UBApplicationStartupReasonReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -31,6 +35,10 @@
 
 /* Begin PBXFileReference section */
 		16380E96F12BA873DFC03D2D /* libPods-StartupReasonReporterTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StartupReasonReporterTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		36A86CDC20BE2DDD00E61398 /* UBApplicationStartupReasonReporterNotificationRelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UBApplicationStartupReasonReporterNotificationRelay.h; path = ApplicationStartupReasonReporterNotificationRelay/UBApplicationStartupReasonReporterNotificationRelay.h; sourceTree = "<group>"; };
+		36A86CDD20BE2DDD00E61398 /* UBApplicationStartupReasonReporterNotificationRelay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UBApplicationStartupReasonReporterNotificationRelay.m; path = ApplicationStartupReasonReporterNotificationRelay/UBApplicationStartupReasonReporterNotificationRelay.m; sourceTree = "<group>"; };
+		36A86CE020BE2DFB00E61398 /* UBApplicationStartupReasonReporterNotificationRelayTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBApplicationStartupReasonReporterNotificationRelayTests.m; sourceTree = "<group>"; };
+		36A86CE120BE2DFB00E61398 /* UBApplicationStartupReasonReporterPriorRunInfoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBApplicationStartupReasonReporterPriorRunInfoTests.m; sourceTree = "<group>"; };
 		3A096D341EB7DE5C00F7DF5B /* StartupReasonReporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartupReasonReporter.h; sourceTree = "<group>"; };
 		3AE8A2301EA14A4E00AA6B9E /* StartupReasonReporter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StartupReasonReporter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AE8A2341EA14A4E00AA6B9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -105,6 +113,8 @@
 				6171903A1EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfo.h */,
 				6171903B1EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfo.m */,
 				6171903C1EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfoProtocol.h */,
+				36A86CDC20BE2DDD00E61398 /* UBApplicationStartupReasonReporterNotificationRelay.h */,
+				36A86CDD20BE2DDD00E61398 /* UBApplicationStartupReasonReporterNotificationRelay.m */,
 				3AE8A2341EA14A4E00AA6B9E /* Info.plist */,
 				3A096D341EB7DE5C00F7DF5B /* StartupReasonReporter.h */,
 			);
@@ -114,6 +124,8 @@
 		3AE8A23D1EA14A4E00AA6B9E /* StartupReasonReporterTests */ = {
 			isa = PBXGroup;
 			children = (
+				36A86CE020BE2DFB00E61398 /* UBApplicationStartupReasonReporterNotificationRelayTests.m */,
+				36A86CE120BE2DFB00E61398 /* UBApplicationStartupReasonReporterPriorRunInfoTests.m */,
 				61C904001EB2C407008593BF /* UBApplicationStartupReasonReporterTests.m */,
 				3AE8A2401EA14A4E00AA6B9E /* Info.plist */,
 			);
@@ -138,6 +150,7 @@
 				6171903E1EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfo.h in Headers */,
 				617190401EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfoProtocol.h in Headers */,
 				617190381EB2B47400057990 /* UBApplicationStartupReasonReporter.h in Headers */,
+				36A86CDE20BE2DDD00E61398 /* UBApplicationStartupReasonReporterNotificationRelay.h in Headers */,
 				3A096D351EB7DEBD00F7DF5B /* StartupReasonReporter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,8 +184,6 @@
 				3AE8A2351EA14A4E00AA6B9E /* Sources */,
 				3AE8A2361EA14A4E00AA6B9E /* Frameworks */,
 				3AE8A2371EA14A4E00AA6B9E /* Resources */,
-				C01E4EFBE90FD18BED1CB6A0 /* [CP] Embed Pods Frameworks */,
-				A8A367EC7A4C70C93BC85B89 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -246,43 +257,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StartupReasonReporterTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		A8A367EC7A4C70C93BC85B89 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StartupReasonReporterTests/Pods-StartupReasonReporterTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C01E4EFBE90FD18BED1CB6A0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StartupReasonReporterTests/Pods-StartupReasonReporterTests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -293,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BECE33401F4D96D100B359CA /* README.md in Sources */,
+				36A86CDF20BE2DDD00E61398 /* UBApplicationStartupReasonReporterNotificationRelay.m in Sources */,
 				6171903D1EB2B4DB00057990 /* UBApplicationStartupReasonReporter.m in Sources */,
 				6171903F1EB2B4DB00057990 /* UBApplicationStartupReasonReporterPriorRunInfo.m in Sources */,
 			);
@@ -302,7 +287,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36A86CE320BE2DFB00E61398 /* UBApplicationStartupReasonReporterPriorRunInfoTests.m in Sources */,
 				618915D11EB2CFBC0000CBFA /* UBApplicationStartupReasonReporterTests.m in Sources */,
+				36A86CE220BE2DFB00E61398 /* UBApplicationStartupReasonReporterNotificationRelayTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
