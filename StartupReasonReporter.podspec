@@ -29,12 +29,15 @@ The Startup Reason Reporter provides developers the the reason that an iOS appli
   s.ios.deployment_target = '8.0'
 
   s.subspec 'Core' do |core|
-    core.source_files = 'StartupReasonReporter/StartupReasonReporter/*'
+    core.source_files = 'StartupReasonReporter/StartupReasonReporter/*', 'StartupReasonReporter/ApplicationStartupReasonReporterNotificationRelay/*'
   end
 
   s.subspec 'PriorRunInfo' do |pri|
     pri.source_files = 'StartupReasonReporter/StartupReasonReporterPriorRunInfo/*'
     pri.dependency 'StartupReasonReporter/Core'
   end
+
+
+
 
 end
